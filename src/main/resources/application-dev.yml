@@ -1,0 +1,51 @@
+ta404:
+  modules:
+    refresh-mapper-xml:
+      enabled: true  # 默认开发模式开启XML 刷新
+    runqian:
+      enable: true
+    captcha:
+      number-check-code-level: 7
+      user-check-code: false
+      captcha-type: "simple"
+      password-validation-error-number: 2
+      cacheNumber: 10000
+      timingClear: 180
+  component:
+    security:
+      passwordPolicyList:
+        - errorNum: 5
+          lockTime: 10
+          timeInterval: 30
+      permit-urls:
+        - /druid/**
+        - /indexRestService/getCryptoInfo
+        - /indexRestService/getToken
+        - /indexRestService/healthCheck
+        - /captcha/**
+      # 是否加密用户名,开启会在登录或登录页修改密码时对用户名加密, 默认false
+      encrypt-login-id: false
+      # 密码等级,从1到4,默认等级为3
+      #      4种字符类型：0-9，a-z，A-Z，特殊字符
+      #      难度等级1:6位纯数字
+      #      难度等级2:4选2，8-20位
+      #      难度等级3:4选3，8-20位
+      #      难度等级4:4选4，8-20位
+      password-level: 3
+  limit:
+    repeat-extra-url:
+      - /demo/uploadRestService/chunk
+      - /indexRestService/healthCheck
+      - /demo/uploadRestService/mergeFile
+      - /org/orguser/userManagementRestService/queryEffectiveUser
+      - /org/authority/authorityAgentRestService/queryReAgentUsersByOrgId
+      - /codetable/getCode
+      - /indexRestService/getCurUserAccount
+      - /org/orguser/orgManagementRestService/getOrgByAsync
+      - /org/authority/roleAuthorityManagementRestService/queryCurrentAdminRoleWrapeOrgTree
+      - /org/authority/examinerAuthorityRestService/queryOrgTreeByAsync
+context:
+  listener:
+    classes: com.yinhai.ta404.autoconfigure.AutoConfigure
+
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.healthmanageweb.healthcheckmg.mapper.write.HealthCheckServiceMgWriteMapper">
+    <insert id="handleHealthCheckSetInfo"
+            parameterType="com.yinhai.healthmanageweb.healthcheckmg.vo.HealthCheckSetInfoHandleVo">
+        insert into healthcheck_set_info
+        (set_id,
+         set_name,
+         set_price,
+         suit_city,
+         order_quantity,
+         suit_label,
+         status,
+         expire_time,
+         set_desc)
+        values (#{setId,jdbcType=VARCHAR},
+                #{setName,jdbcType=VARCHAR}, #{setPrice,jdbcType=NUMERIC},
+                #{suitCity,jdbcType=VARCHAR},
+                #{orderQuantity,jdbcType=INTEGER},
+                #{suitLabel,jdbcType=VARCHAR},
+                #{status,jdbcType=VARCHAR},
+                #{expireTime,jdbcType=TIMESTAMP},
+                #{setDesc,jdbcType=VARCHAR})
+-- PostgreSQL 的 upsert（update or insert）功能 只在 PostgreSQL 9.5 以上可⽤；
+-- upsert 功能就是当执⾏ insert 操作时，通过 on conflict( 唯⼀索引....) 进行判断；
+-- 如果数据表中不存在对应的记录，PostgreSQL 执⾏插⼊操作；
+-- 如果数据表中存在对应的记录，则执⾏更新操作
+            on conflict(set_id) do
+        update set
+            set_name = #{setName,jdbcType=VARCHAR},
+            set_price = #{setPrice,jdbcType=NUMERIC},
+            suit_city = #{suitCity,jdbcType=VARCHAR},
+            order_quantity = #{orderQuantity,jdbcType=INTEGER},
+            suit_label = #{suitLabel,jdbcType=VARCHAR},
+            status = #{status,jdbcType=VARCHAR},
+            expire_time = #{expireTime,jdbcType=TIMESTAMP},
+            set_desc = #{setDesc,jdbcType=VARCHAR}
+    </insert>
+</mapper>

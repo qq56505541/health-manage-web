@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.healthmanageweb.healthcheckmg.mapper.read.HealthCheckServiceMgReadMapper">
+    <select id="getCityInfo" resultType="java.util.HashMap">
+        select city_code     id,
+               name,
+               province_code pid
+        from city
+        union
+        select province_code id,
+               name,
+               null          pid
+        from province
+    </select>
+
+    <select id="queryHealthcheckSetInfoList"
+            parameterType="com.yinhai.healthmanageweb.healthcheckmg.vo.HealthCheckSetInfoQueryVo"
+            resultType="com.yinhai.healthmanageweb.healthcheckmg.entity.HealthCheckSetInfoEntity">
+        select
+        set_id as setId,
+        set_name as setName,
+        set_price as setPrice,
+        suit_city as suitCity,
+        order_quantity as orderQuantity,
+        suit_label as suitLabel,
+        status as status,
+        expire_time as expireTime,
+        set_desc as setDesc
+        from
+        healthcheck_set_info
+        <where>
+            1=1
+            <if test="setInfo!=null">
+                and (set_id like concat('%',#{setInfo},'%') or set_name like
+                concat('%',#{setInfo},'%'))
+            </if>
+            <if test="suitCity!=null">
+                and suit_city like concat('%',#{suitCity},'%')
+            </if>
+        </where>
+        order by
+        set_id desc
+    </select>
+</mapper>
