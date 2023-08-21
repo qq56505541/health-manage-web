@@ -4,6 +4,7 @@ import com.yinhai.healthmanageweb.healthcheckmg.entity.HealthCheckSetInfoEntity;
 import com.yinhai.healthmanageweb.healthcheckmg.mapper.read.HealthCheckServiceMgReadMapper;
 import com.yinhai.healthmanageweb.healthcheckmg.service.read.HealthCheckServiceMgReadService;
 import com.yinhai.healthmanageweb.healthcheckmg.vo.HealthCheckSetInfoQueryVo;
+import com.yinhai.healthmanageweb.healthcheckmg.vo.HealthcheckSetAttachmentInfoVo;
 import com.yinhai.ta404.core.restservice.requestbean.PageParam;
 import com.yinhai.ta404.core.restservice.resultbean.Page;
 import com.yinhai.ta404.core.service.BaseService;
@@ -32,5 +33,15 @@ public class HealthCheckServiceMgReadServiceImpl extends BaseService implements 
         healthCheckServiceMgReadMapper.beginPager(pageParam);
         List<HealthCheckSetInfoEntity> list = healthCheckServiceMgReadMapper.queryHealthcheckSetInfoList(healthCheckSetInfoQueryVo);
         return healthCheckServiceMgReadMapper.endPager(list);
+    }
+
+    @Override
+    public HealthcheckSetAttachmentInfoVo getFaceImage(String setId) {
+        return healthCheckServiceMgReadMapper.getFaceImage(setId);
+    }
+
+    @Override
+    public List<HealthcheckSetAttachmentInfoVo> getAttachment(String setId) {
+        return healthCheckServiceMgReadMapper.getAttachment(setId);
     }
 }

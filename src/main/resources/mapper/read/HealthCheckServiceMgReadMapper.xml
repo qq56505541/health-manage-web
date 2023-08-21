@@ -42,4 +42,40 @@
         order by
         set_id desc
     </select>
+
+    <!-- 根据套餐编号查询封面图片，取最近上传的一张为当前的封面图片 -->
+    <select id="getFaceImage" parameterType="java.lang.String"
+            resultType="com.yinhai.healthmanageweb.healthcheckmg.vo.HealthcheckSetAttachmentInfoVo">
+        select attach_id       as attachId,
+               attach_name     as attachName,
+               attach_type     as attachType,
+               attach_size     as attachSize,
+               attach_uuid     as attachUuid,
+               storage_url     as storageUrl,
+               attach_category as attachCategory,
+               status,
+               set_id          as setId
+        from healthcheck_set_info_attachment
+        where set_id = #{setId}
+          and attach_category = '0'
+          and attach_id = (select max(attach_id)
+                           from healthcheck_set_info_attachment
+                           where set_id = #{setId}
+                             and attach_category = '0')
+    </select>
+
+    <select id="getAttachment" parameterType="java.lang.String"
+            resultType="com.yinhai.healthmanageweb.healthcheckmg.vo.HealthcheckSetAttachmentInfoVo">
+        select attach_id       as attachId,
+               attach_name     as attachName,
+               attach_type     as attachType,
+               attach_size     as attachSize,
+               attach_uuid     as attachUuid,
+               storage_url     as storageUrl,
+               attach_category as attachCategory,
+               status,
+               set_id          as setId
+        from healthcheck_set_info_attachment
+        where set_id = #{setId}
+    </select>
 </mapper>

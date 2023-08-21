@@ -2,6 +2,7 @@ package com.yinhai.healthmanageweb.healthcheckmg.service.read;
 
 import com.yinhai.healthmanageweb.healthcheckmg.entity.HealthCheckSetInfoEntity;
 import com.yinhai.healthmanageweb.healthcheckmg.vo.HealthCheckSetInfoQueryVo;
+import com.yinhai.healthmanageweb.healthcheckmg.vo.HealthcheckSetAttachmentInfoVo;
 import com.yinhai.ta404.core.restservice.requestbean.PageParam;
 import com.yinhai.ta404.core.restservice.resultbean.Page;
 
@@ -15,4 +16,8 @@ public interface HealthCheckServiceMgReadService {
     List<Map<String, Object>> getCityInfo();
 
     Page<HealthCheckSetInfoEntity> queryHealthcheckSetInfoList(HealthCheckSetInfoQueryVo healthCheckSetInfoQueryVo, PageParam pageParam);
+
+    HealthcheckSetAttachmentInfoVo getFaceImage(String setId);
+
+    List<HealthcheckSetAttachmentInfoVo> getAttachment(String setId);
 }

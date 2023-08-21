@@ -37,4 +37,50 @@
             expire_time = #{expireTime,jdbcType=TIMESTAMP},
             set_desc = #{setDesc,jdbcType=VARCHAR}
     </insert>
+
+    <insert id="saveAttachment"
+            parameterType="com.yinhai.healthmanageweb.healthcheckmg.vo.HealthcheckSetAttachmentInfoVo">
+        insert into healthcheck_set_info_attachment
+        (attach_name,
+         attach_type,
+         attach_size,
+         attach_uuid,
+         storage_url,
+         attach_category,
+         status,
+         set_id)
+        values (#{attachName},
+                #{attachType},
+                #{attachSize},
+                #{attachUuid},
+                #{storageUrl},
+                #{attachCategory},
+                #{status},
+                #{setId})
+    </insert>
+
+    <!--通过主键逻辑删除-->
+    <update id="deleteHealthCheckSetInfo">
+        update healthcheck_set_info
+        set status = '0'
+        where set_id = #{setId}
+    </update>
+
+    <!-- 通过主键，批量逻辑删除-->
+    <update id="deleteHealthCheckSetInfos" parameterType="java.lang.String">
+        update healthcheck_set_info
+        set status = '0'
+        where set_id in
+        <foreach collection="array" item="setId" open="(" separator=","
+                 close=")">
+            #{setId}
+        </foreach>
+    </update>
+
+    <!--通过主键物理删除附件信息-->
+    <delete id="deleteAttachById" parameterType="java.lang.String">
+        delete
+        from healthcheck_set_info_attachment
+        where attach_id = #{attachId}
+    </delete>
 </mapper>
