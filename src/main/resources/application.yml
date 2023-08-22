@@ -4,7 +4,7 @@ ta404:
     version: 5.3.2-RELEASE
 spring:
   profiles:
-    active: dev,datasource,websecurity
+    active: dev,datasource,websecurity,report
   application:
     name: ${ta404.application.name}
   main:

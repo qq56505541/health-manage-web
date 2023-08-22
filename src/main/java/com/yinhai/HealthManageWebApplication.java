@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableWebSecurity(debug = true)
 @ServletComponentScan
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.yinhai","com.scudata"})
 @EnableTransactionManagement
 @EnableAsync
 @EnableScheduling

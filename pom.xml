@@ -99,6 +99,34 @@
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
+    <!--银海报表核心功能jar包-->
+    <dependency>
+        <groupId>com.yinhai</groupId>
+        <artifactId>yh-report-module</artifactId>
+        <version>1.3.0-RELEASE</version>
+    </dependency>
+
+    <!--Fine报表转换器后台支持包-->
+    <dependency>
+        <groupId>com.yinhai</groupId>
+        <artifactId>yh-report-transformer-fine</artifactId>
+        <version>1.3.0-RELEASE</version>
+    </dependency>
+
+    <!--4.0润乾报表转换器后台支持包-->
+    <dependency>
+        <groupId>com.yinhai</groupId>
+        <artifactId>yh-report-transformer-runqian</artifactId>
+        <version>1.3.0-RELEASE</version>
+    </dependency>
+
+    <!--rpx文件版本润乾报表转换器后台支持包-->
+    <dependency>
+        <groupId>com.yinhai</groupId>
+        <artifactId>yh-report-transformer-runqian-rpx</artifactId>
+        <version>1.3.0-RELEASE</version>
+    </dependency>
+
 
     <dependency>
         <groupId>org.postgresql</groupId>

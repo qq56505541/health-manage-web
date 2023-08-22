@@ -1,0 +1,77 @@
+yh-report:
+  datasource:
+    url: jdbc:postgresql://172.80.1.6:5433/yh_report?currentSchema=report
+    username: yhreport_px
+    password: yhreport!@#$
+    driver-class-name: org.postgresql.Driver
+    max-active: 50
+    breakAfterAcquireFailure: false  # 是否链接尝试失败后断开链接
+    timeBetweenConnectErrorMillis: 2000 # 链接失败后尝试链接间隔 毫米
+#    jndi-name: aaa  # 若数据源使用 jndi 则使用此配置
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        show-sql: true
+        ddl-auto: update
+        format-sql: true
+        hbm2ddl:
+          auto: update
+    database: postgresql
+    open-in-view: false # 禁用了OSIV 是的同一个方法中调用一个查询后立即释放连接池 避免出现连接池不够用卡住报错的情况
+#  达梦数据源配置 使用下方jpa，datasource改为dm配置
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      dll-auto: none
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    #    database-platform: org.hibernate.dialect.DmDialect
+#    properties:
+#      hibernate:
+#        default_schema: YH_REPORT
+#        temp:
+#          use_jdbc_metadata_defaults: false
+#        dialect: org.hibernate.dialect.DmDialect
+#        show-sql: none
+#        ddl-auto: update
+#        format-sql: true
+#        hbm2ddl:
+#          auto: none
+#    #    database: POSTGRESQL
+#    open-in-view: false # 禁用了OSIV 是的同一个方法中调用一个查询后立即释放连接池 避免出现连接池不够用卡住报错的情况
+  file:
+    temp-directory-path: D:\test  # 临时文件夹路径 用于存放部分临时文件
+  report-datasource:
+    mode: report # 报表数据源模式 bi|report 若设置为bi则报表所使用的数据源信息有bi模块提供 否则还是由报表的datasource模块地提供
+spring:
+  jpa:
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 300MB
+  redis:
+    cluster:
+      nodes: 127.0.0.1:6379
+      max-redirects: 3
+    timeout: 5000
+    lettuce:
+      pool:
+        max-idle: 16
+        max-active: 32
+        min-idle: 1
+    password: 123456
+#    默认server设置
+server:
+  compression:
+    enabled: true
+  tomcat:
+    max-http-form-post-size: 104857600
+restful:
+  use-redis: false
+  # 页面未选择接口类型get/post时 默认类型
+  default-url-type: post
+  # 当前端url路径不以http开头是拼接此路径
+  url: http://localhost:8888/yh-report-back/

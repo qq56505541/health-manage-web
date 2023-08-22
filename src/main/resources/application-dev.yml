@@ -23,6 +23,11 @@ ta404:
         - /indexRestService/getToken
         - /indexRestService/healthCheck
         - /captcha/**
+        - /yh_report_web_ta404/**
+        - /report/**
+        - /report/security/getCryptoInfo
+        - /reportView/**
+      #        - /yh_report_server_ta404/*
       # 是否加密用户名,开启会在登录或登录页修改密码时对用户名加密, 默认false
       encrypt-login-id: false
       # 密码等级,从1到4,默认等级为3
